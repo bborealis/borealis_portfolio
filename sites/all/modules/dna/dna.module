@@ -51,7 +51,25 @@ function element_validate_letter($form, &$form_state) {
 }
 
 function calculate_dna($input) {
-  return $input;
+  $result_array = array();
+  $split_letter = str_split(strtoupper($input));
+
+  foreach($split_letter as $letter) {
+    if ($letter == "A") {
+      $mirror_letter = "T";
+    } elseif ($letter == "T") {
+      $mirror_letter = "A";
+    } elseif ($letter == "C") {
+      $mirror_letter = "G";
+    } elseif ($letter == "G") {
+      $mirror_letter == "C";
+    } else {
+      $mirror_letter == "";
+    }
+    array_push($result_array, $mirror_letter);
+  }
+
+  return $result_array;
 }
 
 function dna_form_submit($form, &$form_state) {
@@ -63,6 +81,10 @@ function dna_form_submit($form, &$form_state) {
 }
 
 function dna_results() {
-  $output = $_SESSION['dna_mirror_view'];
+  $output = '';
+  foreach ($_SESSION['dna_mirror_view'] as $value) {
+    $output = $output . $value;
+  }
+
   return "The results are in: $output";
 }
