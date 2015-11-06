@@ -105,11 +105,13 @@ class DnaFunctionalTests extends DrupalWebTestCase {
     parent::setUp(array('dna'));
   }
 
+//tests page routing
   public function testDnaNavigation() {
     $this->drupalGet('dna');
     $this->assertText('Double Helix Mirror', 'Success!');
   }
 
+//Tests that the submit button is working and page routing.
   public function testDnaSubmit() {
     $edit = array();
     $edit['dna_first_half'] = "A";
