@@ -1,6 +1,28 @@
 <?php
 
-class DNA extends DrupalUnitTestCase {
+class DNATests extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'DNA mirror test',
+      'description' => 'Tests for the interface of the DNA module.',
+      'group' => 'Epicodus web test',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp(array('dna'));
+  }
+
+  public function testDNANavigation() {
+    $this->drupalGet('dna');
+    $this->assertText('Double Helix Mirror', 'Success!');
+  }
+
+}
+
+class DNATests extends DrupalUnitTestCase {
+
   public static function getInfo() {
     return array(
       'name' => 'DNA mirror test',
