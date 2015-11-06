@@ -27,6 +27,7 @@ _password : bborealisPass_
 * Go to localhost:8888  
 * Site logins :
 
+_Get to the login by going to /user_
 _user : bborealis_  
 _password : pass_  
 
