@@ -25,7 +25,7 @@ function dna_form() {
     '#title' => 'First half of the double helix',
     '#type' => 'textfield',
     '#description' => t('Please enter your DNA helix.'),
-    // '#element_validate' => array('element_validate_letter'),
+    '#element_validate' => array('element_validate_letter'),
     '#required' => TRUE,
   );
 
@@ -35,6 +35,19 @@ function dna_form() {
   );
 
   return $form;
+}
+
+function element_validate_letter($form, &$form_state) {
+  $split_letter = str_split(strtoupper($form_state['values']['dna_first_half']));
+  foreach($split_letter as $letter) {
+    if ($letter != "A" &&
+        $letter != "T" &&
+        $letter != "C" &&
+        $letter != "G" &&
+        $letter != " " ) {
+      form_set_error('dna_first_half', 'Must enter a string of valid DNA Helix values (A, T, C, or G)');
+    };
+  };
 }
 
 function calculate_dna($input) {
