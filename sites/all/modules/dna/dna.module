@@ -1,0 +1,38 @@
+<?php
+
+function dna_menu() {
+  $items = array();
+  $items['dna'] = array(
+    'title' => 'Double Helix Mirror',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('dna_form'),
+    'access callback' => TRUE,
+    'type' => MENU_NORMAL_ITEM,
+  );
+  $items['dna_results_page'] = array(
+    'title' => 'Results',
+    'page callback' => 'dna_results',
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  );
+  return $items;
+
+}
+
+function dna_form() {
+  $form = array();
+  $form['dna_first_half'] = array(
+    '#title' => 'First half of the double helix',
+    '#type' => 'textfield',
+    '#description' => t('Please enter your DNA helix.')
+    '#element_validate' => array('element_validate_letter'),
+    '#required' => TRUE,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => 'Calculate DNA',
+  );
+
+  return $form;
+}

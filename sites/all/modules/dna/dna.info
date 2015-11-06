@@ -1,0 +1,7 @@
+name = DNA
+description = Takes an input of one side of a double helix and calculates the othe side.
+package = Epicodus Drupal Code Review
+core = 7.x
+files[] = dna.module
+files[] = dna.test
+dependencies[] = simpletest
