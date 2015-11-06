@@ -1,37 +1,16 @@
 <?php
 
-class DNATests extends DrupalWebTestCase {
+class DnaUnitTests extends DrupalUnitTestCase {
 
   public static function getInfo() {
     return array(
-      'name' => 'DNA mirror test',
-      'description' => 'Tests for the interface of the DNA module.',
-      'group' => 'Epicodus web test',
-    );
-  }
-
-  public function setUp() {
-    parent::setUp(array('dna'));
-  }
-
-  public function testDNANavigation() {
-    $this->drupalGet('dna');
-    $this->assertText('Double Helix Mirror', 'Success!');
-  }
-
-}
-
-class DNATests extends DrupalUnitTestCase {
-
-  public static function getInfo() {
-    return array(
-      'name' => 'DNA mirror test',
+      'name' => 'DNA unit test',
       'description' => 'Tests that dna.module returns a mirror of the input.',
-      'group' => 'Epicodus unit test'
+      'group' => 'Epicodus code review',
     );
   }
 
-  public function testDNA() {
+  public function testDna() {
     //test description
     $description = 'A lowercase input returns an uppercase output';
     //arrange
@@ -109,5 +88,32 @@ class DNATests extends DrupalUnitTestCase {
     $expected_output = ['C','','T'];
     $this->assertEqual($result, $expected_output, $description);
 
+  }
+}
+
+class DnaFunctionalTests extends DrupalWebTestCase {
+
+  public static function getInfo() {
+    return array(
+      'name' => 'DNA functional test',
+      'description' => 'Tests for the interface of the DNA module.',
+      'group' => 'Epicodus code review',
+    );
+  }
+
+  public function setUp() {
+    parent::setUp(array('dna'));
+  }
+
+  public function testDnaNavigation() {
+    $this->drupalGet('dna');
+    $this->assertText('Double Helix Mirror', 'Success!');
+  }
+
+  public function testDnaSubmit() {
+    $edit = array();
+    $edit['dna_first_half'] = "A";
+    $this->drupalPost('dna', $edit, t('Calculate DNA'));
+    $this->assertText('The results are in:', 'Success!');
   }
 }

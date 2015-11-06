@@ -1,0 +1,1 @@
+[06-Nov-2015 14:19:45 America/Los_Angeles] PHP Fatal error:  Call to undefined method DnaFunctionalTests::asserText() in /Users/Guest/Desktop/borealis_portfolio/sites/all/modules/dna/dna.test on line 116
