@@ -51,6 +51,7 @@ function element_validate_letter($form, &$form_state) {
 }
 
 function calculate_dna($input) {
+  $mirror_letter = "";
   $result_array = array();
   $split_letter = str_split(strtoupper($input));
 
@@ -62,9 +63,9 @@ function calculate_dna($input) {
     } elseif ($letter == "C") {
       $mirror_letter = "G";
     } elseif ($letter == "G") {
-      $mirror_letter == "C";
-    } else {
-      $mirror_letter == "";
+      $mirror_letter = "C";
+    } elseif ($letter == " ") {
+      $mirror_letter = "";
     }
     array_push($result_array, $mirror_letter);
   }

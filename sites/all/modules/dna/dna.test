@@ -11,13 +11,55 @@ class DNA extends DrupalUnitTestCase {
 
   public function testDNA() {
     //test description
-    $description = 'An input returns an output';
+    $description = 'A lowercase input returns an uppercase output';
     //arrange
     $input = 'a';
     //act
     $result = calculate_dna($input);
     //assert
-    $expected_output = 'a';
+    $expected_output = ['T'];
     $this->assertEqual($result, $expected_output, $description);
+
+    //test description
+    $description = 'A "T" input returns an "A" output';
+    //arrange
+    $input = 'T';
+    //act
+    $result = calculate_dna($input);
+    //assert
+    $expected_output = ['A'];
+    $this->assertEqual($result, $expected_output, $description);
+
+    //test description
+    $description = 'An "A" input returns a "T" output';
+    //arrange
+    $input = 'A';
+    //act
+    $result = calculate_dna($input);
+    //assert
+    $expected_output = ['T'];
+    $this->assertEqual($result, $expected_output, $description);
+
+    //test description
+    $description = 'A "C" input returns a "G" output';
+    //arrange
+    $input = 'C';
+    //act
+    $result = calculate_dna($input);
+    //assert
+    $expected_output = ['G'];
+    $this->assertEqual($result, $expected_output, $description);
+
+    //test description
+    $description = 'A "G" input returns a "C" output';
+    //arrange
+    $input = 'G';
+    //act
+    $result = calculate_dna($input);
+    //assert
+    $expected_output = ['C'];
+    $this->assertEqual($result, $expected_output, $description);
+
+
   }
 }
