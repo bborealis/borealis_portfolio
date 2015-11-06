@@ -24,8 +24,8 @@ function dna_form() {
   $form['dna_first_half'] = array(
     '#title' => 'First half of the double helix',
     '#type' => 'textfield',
-    '#description' => t('Please enter your DNA helix.')
-    '#element_validate' => array('element_validate_letter'),
+    '#description' => t('Please enter your DNA helix.'),
+    // '#element_validate' => array('element_validate_letter'),
     '#required' => TRUE,
   );
 
@@ -35,4 +35,21 @@ function dna_form() {
   );
 
   return $form;
+}
+
+function calculate_dna($input) {
+  return $input;
+}
+
+function dna_form_submit($form, &$form_state) {
+  $dna_input = $form_state['values']['dna_first_half'];
+  $dna_output = calculate_dna($dna_input);
+
+  $_SESSION['dna_mirror_view'] = $dna_output;
+  $form_state['redirect'] = 'dna_results_page';
+}
+
+function dna_results() {
+  $output = $_SESSION['dna_mirror_view'];
+  return "The results are in: $output";
 }

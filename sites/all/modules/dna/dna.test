@@ -1,0 +1,23 @@
+<?php
+
+class DNA extends DrupalUnitTestCase {
+  public static function getInfo() {
+    return array(
+      'name' => 'DNA mirror test',
+      'description' => 'Tests that dna.module returns a mirror of the input.',
+      'group' => 'Epicodus unit test'
+    );
+  }
+
+  public function testDNA() {
+    //test description
+    $description = 'An input returns an output';
+    //arrange
+    $input = 'a';
+    //act
+    $result = calculate_dna($input);
+    //assert
+    $expected_output = 'a';
+    $this->assertEqual($result, $expected_output, $description);
+  }
+}
