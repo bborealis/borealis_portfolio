@@ -15,7 +15,8 @@ class DNA extends DrupalUnitTestCase {
     //arrange
     $input = 'a';
     //act
-    $result = calculate_dna($input);
+    $pretty_dna_result = pretty_dna($input);
+    $result = calculate_dna($pretty_dna_result);
     //assert
     $expected_output = ['T'];
     $this->assertEqual($result, $expected_output, $description);
@@ -25,7 +26,8 @@ class DNA extends DrupalUnitTestCase {
     //arrange
     $input = 'T';
     //act
-    $result = calculate_dna($input);
+    $pretty_dna_result = pretty_dna($input);
+    $result = calculate_dna($pretty_dna_result);
     //assert
     $expected_output = ['A'];
     $this->assertEqual($result, $expected_output, $description);
@@ -35,7 +37,8 @@ class DNA extends DrupalUnitTestCase {
     //arrange
     $input = 'A';
     //act
-    $result = calculate_dna($input);
+    $pretty_dna_result = pretty_dna($input);
+    $result = calculate_dna($pretty_dna_result);
     //assert
     $expected_output = ['T'];
     $this->assertEqual($result, $expected_output, $description);
@@ -45,7 +48,8 @@ class DNA extends DrupalUnitTestCase {
     //arrange
     $input = 'C';
     //act
-    $result = calculate_dna($input);
+    $pretty_dna_result = pretty_dna($input);
+    $result = calculate_dna($pretty_dna_result);
     //assert
     $expected_output = ['G'];
     $this->assertEqual($result, $expected_output, $description);
@@ -55,11 +59,33 @@ class DNA extends DrupalUnitTestCase {
     //arrange
     $input = 'G';
     //act
-    $result = calculate_dna($input);
+    $pretty_dna_result = pretty_dna($input);
+    $result = calculate_dna($pretty_dna_result);
     //assert
     $expected_output = ['C'];
     $this->assertEqual($result, $expected_output, $description);
 
+    //test description
+    $description = 'Tests multiple letters. A "GA" input returns a "CT" output';
+    //arrange
+    $input = 'GA';
+    //act
+    $pretty_dna_result = pretty_dna($input);
+    $result = calculate_dna($pretty_dna_result);
+    //assert
+    $expected_output = ['C','T'];
+    $this->assertEqual($result, $expected_output, $description);
+
+    //test description
+    $description = 'Tests that spaces are removed. A "G A" input returns a "CT" output';
+    //arrange
+    $input = 'G A';
+    //act
+    $pretty_dna_result = pretty_dna($input);
+    $result = calculate_dna($pretty_dna_result);
+    //assert
+    $expected_output = ['C','','T'];
+    $this->assertEqual($result, $expected_output, $description);
 
   }
 }

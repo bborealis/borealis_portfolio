@@ -37,6 +37,7 @@ function dna_form() {
   return $form;
 }
 
+//form validation to check that the correct type of inputs are entered.
 function element_validate_letter($form, &$form_state) {
   $split_letter = str_split(strtoupper($form_state['values']['dna_first_half']));
   foreach($split_letter as $letter) {
@@ -50,12 +51,12 @@ function element_validate_letter($form, &$form_state) {
   };
 }
 
-function calculate_dna($input) {
+//this creates the mirror image of the string
+function calculate_dna($pretty_input) {
   $mirror_letter = "";
   $result_array = array();
-  $split_letter = str_split(strtoupper($input));
 
-  foreach($split_letter as $letter) {
+  foreach($pretty_input as $letter) {
     if ($letter == "A") {
       $mirror_letter = "T";
     } elseif ($letter == "T") {
@@ -64,28 +65,50 @@ function calculate_dna($input) {
       $mirror_letter = "G";
     } elseif ($letter == "G") {
       $mirror_letter = "C";
-    } elseif ($letter == " ") {
+    } elseif ($letter == "") {
       $mirror_letter = "";
     }
     array_push($result_array, $mirror_letter);
   }
-
   return $result_array;
+}
+
+//this takes the original string, removing spaces and capitalizes each character.
+function pretty_dna($input) {
+  $pretty_dna_array = array();
+  $split_letter = str_split(strtoupper($input));
+
+  foreach($split_letter as $letter) {
+    if ($letter == " ") {
+      $letter = "";
+    }
+    array_push($pretty_dna_array, $letter);
+  }
+  return $pretty_dna_array;
 }
 
 function dna_form_submit($form, &$form_state) {
   $dna_input = $form_state['values']['dna_first_half'];
-  $dna_output = calculate_dna($dna_input);
+  //first clean up the original string using the pretty_dna() function
+  $pretty_dna_input = pretty_dna($dna_input);
+  //second calculate the mirror image of the now "pretty" array of letters
+  $dna_output = calculate_dna($pretty_dna_input);
 
+  $_SESSION['dna_view'] = $pretty_dna_input;
   $_SESSION['dna_mirror_view'] = $dna_output;
   $form_state['redirect'] = 'dna_results_page';
 }
 
 function dna_results() {
+  $original = '';
   $output = '';
+  //pull out the letters from both arrays and add them to a string to be returned
+  foreach ($_SESSION['dna_view'] as $original_value) {
+    $original = $original . $original_value;
+  }
   foreach ($_SESSION['dna_mirror_view'] as $value) {
     $output = $output . $value;
   }
 
-  return "The results are in: $output";
+  return "The results are in: $original $output";
 }
